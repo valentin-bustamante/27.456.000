@@ -1,0 +1,28 @@
+.form {
+  display: grid;
+  gap: 0.95rem;
+  margin: 1.4rem 0;
+  padding: 1.1rem;
+  background: rgba(16, 16, 16, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+.actions {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.notice {
+  color: #ffffff;
+  background: rgba(229, 9, 20, 0.1);
+  border: 1px solid rgba(229, 9, 20, 0.3);
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+  margin: 0 0 1.3rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+}

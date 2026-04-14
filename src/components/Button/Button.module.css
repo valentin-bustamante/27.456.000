@@ -1,0 +1,70 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease,
+    border-color 0.22s ease;
+  outline: none;
+}
+
+.button:focus-visible {
+  outline: 2px solid rgba(229, 9, 20, 0.65);
+  outline-offset: 2px;
+}
+
+.primary {
+  background: #e50914;
+  color: #ffffff;
+  border: 1px solid rgba(229, 9, 20, 0.35);
+}
+
+.secondary {
+  background: rgba(100, 116, 139, 0.82);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.danger {
+  background: rgba(220, 38, 38, 0.88);
+  color: #ffffff;
+  border: 1px solid rgba(220, 38, 38, 0.35);
+}
+
+.ghost {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.small {
+  padding: 0.55rem 0.95rem;
+  font-size: 0.82rem;
+}
+
+.medium {
+  padding: 0.72rem 1.25rem;
+  font-size: 0.86rem;
+}
+
+.large {
+  padding: 0.85rem 1.4rem;
+  font-size: 0.95rem;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.primary:hover,
+.secondary:hover,
+.danger:hover,
+.ghost:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}

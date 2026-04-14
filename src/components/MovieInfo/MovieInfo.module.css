@@ -1,0 +1,15 @@
+.meta {
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0;
+  font-size: 0.9rem;
+  z-index: 1;
+}
+
+.genre,
+.rating {
+  color: #ffffff;
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 500;
+  z-index: 1;
+}
