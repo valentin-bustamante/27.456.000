@@ -1,0 +1,9 @@
+.search-bar {
+    font-size: clamp(1rem, 1vw, 2.1rem);
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border-color: 2px solid rgba(229, 9, 20, 0.65);
+    margin: 10px 0;
+    max-width: 460px;
+}

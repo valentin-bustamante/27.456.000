@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import { Titulo } from "../../components/titulo/titulo";
+import { SearchBar } from "../../components/SearchBar/SearchBar";
 import { MovieForm } from "../../components/Form/Form";
 import { Button } from "../../components/Button/Button";
 import { ListSection } from "../../components/ListSection/ListSection";
@@ -62,6 +63,9 @@ function Home() {
   });
   const [editingId, setEditingId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+  const [searchTerm, setSearchTerm] = useState("");
 
   const resetForm = useCallback(() => {
     setForm({
@@ -179,8 +183,17 @@ function Home() {
     setIsModalOpen(false);
   }, [resetForm]);
 
-  const porVer = useMemo(() => arreglo.filter((item) => !item.viewed), [arreglo]);
-  const vistos = useMemo(() => arreglo.filter((item) => item.viewed), [arreglo]);
+  const filteredItems = useMemo(() => {
+    const term = searchTerm.toLowerCase().trim();
+
+    return arreglo.filter((item) =>
+      item.title.toLowerCase().includes(term) ||
+      item.director.toLowerCase().includes(term)
+    );
+  }, [searchTerm, arreglo]);
+
+  const porVer = useMemo(() => filteredItems.filter((item) => !item.viewed), [filteredItems]);
+  const vistos = useMemo(() => filteredItems.filter((item) => item.viewed), [filteredItems]);
 
   return (
     <div className={styles.home}>
@@ -201,6 +214,12 @@ function Home() {
           </div>
         </div>
       </Button>
+
+      <SearchBar
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Buscar por titulo o director..."
+      />
 
       <ListSection
         title="Por ver"
