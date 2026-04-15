@@ -6,6 +6,7 @@ import { MovieInfo } from "../MovieInfo/MovieInfo";
 
 const MovieCardComponent = ({ item, onToggleViewed, onEdit, onDelete }) => {
   return (
+    
     <article className={styles.card}>
       <div className={styles.cardHeader}>
         <Badge variant="type">{item.type}</Badge>

@@ -1,13 +1,13 @@
 .titulo {
   font-size: clamp(2rem, 3vw, 2.6rem);
   font-weight: 800;
-  text-align: left;
   margin: 0 0 0.8rem;
   color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   position: relative;
   line-height: 1.02;
+  display: inline;
 }
 
 .titulo::after {

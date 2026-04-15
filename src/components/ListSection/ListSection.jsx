@@ -11,6 +11,7 @@ const ListSectionComponent = ({
   onDelete,
 }) => {
   return (
+    <div className={styles.sectionDiv}>
     <section className={styles.section}>
       <h2 className={styles.title}>{title}</h2>
       <Cards
@@ -21,6 +22,7 @@ const ListSectionComponent = ({
         onDelete={onDelete}
       />
     </section>
+    </div>
   );
 };
 

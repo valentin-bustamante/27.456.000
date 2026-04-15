@@ -6,7 +6,7 @@ import { Button } from "../../components/Button/Button";
 import { ListSection } from "../../components/ListSection/ListSection";
 import styles from "./home.module.css";
 
-const nombreProyecto = "casi netflix";
+const nombreProyecto = "etflix";
 
 
 const initialArreglo = [
@@ -210,7 +210,11 @@ function Home() {
 
   return (
     <div className={styles.home}>
+      <div className="header">
+      <img src="../src/assets/logo.png" alt="Logo" className={styles.logo}/>
       <Titulo texto={nombreProyecto} />
+        </div>
+
 
       <Button
         type="button"

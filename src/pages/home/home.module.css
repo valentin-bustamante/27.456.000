@@ -173,3 +173,17 @@
   border-bottom: 2px solid #e50914;
   padding-bottom: 0.4rem;
 }
+
+
+.header{
+  display: flex;
+  align-items: center;
+    justify-content: center;
+    flex-direction: row;
+  gap: 1.5rem;
+}
+
+.logo{
+  width: 2rem;
+  padding-right: 10px;
+}
