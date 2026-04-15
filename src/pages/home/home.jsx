@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useEffectEvent, useMemo, useState } from "react";
 import { Titulo } from "../../components/titulo/titulo";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
 import { MovieForm } from "../../components/Form/Form";
@@ -7,6 +7,7 @@ import { ListSection } from "../../components/ListSection/ListSection";
 import styles from "./home.module.css";
 
 const nombreProyecto = "casi netflix";
+
 
 const initialArreglo = [
   {
@@ -51,8 +52,13 @@ const initialArreglo = [
   },
 ];
 
+
+
 function Home() {
-  const [arreglo, setArreglo] = useState(initialArreglo);
+  const [arreglo, setArreglo] = useState(() => {
+    const saved = localStorage.getItem("peliculas");
+    return saved ? JSON.parse(saved) : initialArreglo;
+  });
   const [form, setForm] = useState({
     title: "",
     director: "",
@@ -78,6 +84,7 @@ function Home() {
     });
     setEditingId(null);
   }, []);
+
 
   const openAddModal = useCallback(() => {
     resetForm();
@@ -183,6 +190,12 @@ function Home() {
     setIsModalOpen(false);
   }, [resetForm]);
 
+  useEffect(() => {
+    localStorage.setItem("peliculas", JSON.stringify(arreglo));
+  }, [arreglo]);
+  
+  
+
   const filteredItems = useMemo(() => {
     const term = searchTerm.toLowerCase().trim();
 
@@ -224,7 +237,7 @@ function Home() {
       <ListSection
         title="Por ver"
         items={porVer}
-        emptyText="No hay contenido por ver."
+        emptyText="No hay contsetenido por ver."
         onToggleViewed={handleToggleViewed}
         onEdit={handleEdit}
         onDelete={handleDelete}
