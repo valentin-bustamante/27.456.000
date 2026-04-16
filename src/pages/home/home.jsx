@@ -4,6 +4,7 @@ import { SearchBar } from "../../components/SearchBar/SearchBar";
 import { MovieForm } from "../../components/Form/Form";
 import { Button } from "../../components/Button/Button";
 import { ListSection } from "../../components/ListSection/ListSection";
+import { Badge } from "../../components/Badge/Badge";
 import styles from "./home.module.css";
 
 const nombreProyecto = "etflix";
@@ -208,6 +209,19 @@ function Home() {
   const porVer = useMemo(() => filteredItems.filter((item) => !item.viewed), [filteredItems]);
   const vistos = useMemo(() => filteredItems.filter((item) => item.viewed), [filteredItems]);
 
+  // Contadores sobre TODO el catálogo
+  const total = useMemo(() => arreglo.length, [arreglo]);
+  const vistasCount = useMemo(() => getVistasCount(arreglo), [arreglo]);
+  const noVistasCount = useMemo(() => getNoVistasCount(arreglo), [arreglo]);
+
+  function getVistasCount(arr) {
+    return arr.filter((item) => item.viewed).length;
+  }
+
+  function getNoVistasCount(arr) {
+    return arr.filter((item) => !item.viewed).length;
+  }
+
   return (
     <div className={styles.home}>
       <div className="header">
@@ -237,6 +251,13 @@ function Home() {
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Buscar por titulo o director..."
       />
+
+      {/* Contadores */}
+      <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem" }}>
+        <Badge variant="default">Total: {total}</Badge>
+        <Badge variant="viewed">Vistas: {vistasCount}</Badge>
+        <Badge variant="notViewed">No vistas: {noVistasCount}</Badge>
+      </div>
 
       <ListSection
         title="Por ver"
