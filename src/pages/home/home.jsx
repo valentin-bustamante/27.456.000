@@ -1,10 +1,12 @@
-import { useCallback, useEffect, useEffectEvent, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Titulo } from "../../components/titulo/titulo";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
 import { MovieForm } from "../../components/Form/Form";
 import { Button } from "../../components/Button/Button";
+import FilterMovie from "../../components/FilterMovie/FilterMovie";
 import { ListSection } from "../../components/ListSection/ListSection";
 import styles from "./home.module.css";
+
 
 const nombreProyecto = "etflix";
 
@@ -72,6 +74,10 @@ function Home() {
 
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [filters, setFilters] = useState({
+    type: "",
+    genre: "",
+  });
 
   const resetForm = useCallback(() => {
     setForm({
@@ -190,6 +196,10 @@ function Home() {
     setIsModalOpen(false);
   }, [resetForm]);
 
+  const handleFilterChange = useCallback((name, value) => {
+    setFilters((prev) => ({ ...prev, [name]: value }));
+  }, []);
+
   useEffect(() => {
     localStorage.setItem("peliculas", JSON.stringify(arreglo));
   }, [arreglo]);
@@ -198,12 +208,18 @@ function Home() {
 
   const filteredItems = useMemo(() => {
     const term = searchTerm.toLowerCase().trim();
+    const baseFiltered = arreglo.filter((item) => {
+      const matchesSearch =
+        item.title.toLowerCase().includes(term) ||
+        item.director.toLowerCase().includes(term);
+      const matchesType = filters.type === "" || item.type === filters.type;
+      const matchesGenre = filters.genre === "" || item.genre === filters.genre;
 
-    return arreglo.filter((item) =>
-      item.title.toLowerCase().includes(term) ||
-      item.director.toLowerCase().includes(term)
-    );
-  }, [searchTerm, arreglo]);
+      return matchesSearch && matchesType && matchesGenre;
+    });
+
+    return baseFiltered;
+  }, [searchTerm, arreglo, filters]);
 
   const porVer = useMemo(() => filteredItems.filter((item) => !item.viewed), [filteredItems]);
   const vistos = useMemo(() => filteredItems.filter((item) => item.viewed), [filteredItems]);
@@ -232,11 +248,18 @@ function Home() {
         </div>
       </Button>
 
-      <SearchBar
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Buscar por titulo o director..."
-      />
+      <div className={styles.searchFilterRow}>
+        <SearchBar
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Buscar por título o director..."
+        />
+
+        <FilterMovie
+          filters={filters}
+          onChange={handleFilterChange}
+        />
+      </div>
 
       <ListSection
         title="Por ver"
