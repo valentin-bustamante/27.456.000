@@ -1,0 +1,37 @@
+.container {
+    width: 100%;
+    max-width: 460px;
+    margin: 10px 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.group {
+    display: flex;
+}
+
+.label {
+    display: none;
+}
+
+.select {
+    font-size: clamp(0.95rem, 0.50vw, 1.05rem);
+    width: 100%;
+    min-width: 0;
+    padding: 10px;
+    border-radius: 6px;
+    border: 2px solid rgba(229, 9, 20, 0.65);
+    background-color: rgba(18, 18, 18, 0.94);
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.select:focus {
+    outline: none;
+}
+
+@media (max-width: 600px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}

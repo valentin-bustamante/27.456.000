@@ -187,3 +187,27 @@
   width: 2rem;
   padding-right: 10px;
 }
+
+.searchFilterRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+
+.searchFilterRow > * {
+  flex: 1 1 0;
+  max-width: 460px;
+}
+
+@media (max-width: 900px) {
+  .searchFilterRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .searchFilterRow > * {
+    max-width: none;
+  }
+}
