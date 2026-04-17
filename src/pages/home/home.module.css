@@ -194,14 +194,37 @@
 .header{
   display: flex;
   align-items: center;
-    justify-content: center;
-    flex-direction: row;
-  gap: 1.5rem;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 .logo{
   width: 2rem;
   padding-right: 10px;
+}
+
+.logoText {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.logoLetter {
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: #e50914;
+  text-shadow: 0 0 10px rgba(229, 9, 20, 0.25);
+  line-height: 1;
+}
+
+.logoRest {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  line-height: 1;
 }
 
 .searchFilterRow {
