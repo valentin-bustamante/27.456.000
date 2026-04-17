@@ -209,7 +209,6 @@ function Home() {
   const porVer = useMemo(() => filteredItems.filter((item) => !item.viewed), [filteredItems]);
   const vistos = useMemo(() => filteredItems.filter((item) => item.viewed), [filteredItems]);
 
-  // Contadores sobre TODO el catálogo
   const total = useMemo(() => arreglo.length, [arreglo]);
   const vistasCount = useMemo(() => getVistasCount(arreglo), [arreglo]);
   const noVistasCount = useMemo(() => getNoVistasCount(arreglo), [arreglo]);
