@@ -3,8 +3,10 @@ import styles from "./FilterMovie.module.css";
 function FilterMovie({ filters, sorting, onChange, onSortChange }) {
     return (
         <div className={styles.container}>
-            <div className={styles.filterRow}>
-                <span className={styles.rowLabel}>Filtros</span>
+            <div className={styles.headerRow}>
+                <span className={styles.rowLabel}>Filtros y orden</span>
+            </div>
+            <div className={styles.controlsRow}>
                 <select
                     className={styles.select}
                     value={filters.type}
@@ -28,10 +30,6 @@ function FilterMovie({ filters, sorting, onChange, onSortChange }) {
                     <option value="Comedia">Comedia</option>
                     <option value="Aventura">Aventura</option>
                 </select>
-            </div>
-
-            <div className={styles.sortRow}>
-                <span className={styles.rowLabel}>Ordenar</span>
                 <select
                     className={styles.select}
                     value={sorting.sortBy}

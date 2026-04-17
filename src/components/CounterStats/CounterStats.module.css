@@ -1,30 +1,30 @@
 .container {
-  margin: 1.5rem 0;
-  padding: 1.5rem;
+  margin: 0.9rem 0 1.1rem;
+  padding: 0.95rem;
   background: rgba(15, 15, 15, 0.96);
-  border-radius: 14px;
+  border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
 }
 
 .statsWrapper {
   display: flex;
-  gap: 2rem;
+  gap: 0.9rem;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .statItem {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.35rem;
   flex: 1;
-  min-width: 140px;
-  padding: 1rem;
+  min-width: 116px;
+  padding: 0.55rem 0.5rem;
   text-align: center;
-  border-left: 2px solid rgba(229, 9, 20, 0.3);
+  border-left: 1px solid rgba(229, 9, 20, 0.26);
   transition: all 0.22s ease;
 }
 
@@ -39,26 +39,27 @@
 }
 
 .label {
-  font-size: 0.875rem;
-  font-weight: 400;
+  font-size: 0.7rem;
+  font-weight: 600;
   color: #999999;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.09em;
 }
 
 .number {
-  font-size: 2.5rem;
+  font-size: 1.65rem;
   font-weight: 700;
   color: #ffffff;
+  line-height: 1;
 }
 
 .progressBar {
   width: 100%;
-  height: 3px;
+  height: 2px;
   background-color: rgba(255, 255, 255, 0.08);
   border-radius: 2px;
   overflow: hidden;
-  margin-top: 0.5rem;
+  margin-top: 0.45rem;
 }
 
 .progressFill {
@@ -71,20 +72,20 @@
 .genreBlock {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.45rem;
   width: 100%;
-  padding: 1rem;
+  padding: 0.62rem;
   background: rgba(255, 255, 255, 0.02);
-  border-radius: 12px;
+  border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .genreLabel {
-  font-size: 0.875rem;
-  font-weight: 400;
+  font-size: 0.7rem;
+  font-weight: 600;
   color: #999999;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.09em;
 }
 
 .genreList {
@@ -93,15 +94,15 @@
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.35rem;
 }
 
 .genreItem {
-  padding: 0.5rem 0.8rem;
-  border-radius: 20px;
+  padding: 0.28rem 0.5rem;
+  border-radius: 999px;
   background: linear-gradient(135deg, rgba(229, 9, 20, 0.2), rgba(229, 9, 20, 0.1));
   color: rgba(255, 255, 255, 0.9);
-  font-size: 0.9rem;
+  font-size: 0.76rem;
   font-weight: 500;
   border: 1px solid rgba(229, 9, 20, 0.3);
   transition: all 0.2s ease;
@@ -114,56 +115,56 @@
 
 @media (max-width: 768px) {
   .statsWrapper {
-    gap: 1rem;
+    gap: 0.6rem;
   }
 
   .statItem {
-    padding: 0.75rem;
-    min-width: 120px;
+    padding: 0.45rem;
+    min-width: 102px;
   }
 
   .label {
-    font-size: 0.8rem;
+    font-size: 0.67rem;
   }
 
   .number {
-    font-size: 2rem;
+    font-size: 1.4rem;
   }
 
   .genreList {
-    justify-content: center;
+    justify-content: flex-start;
   }
 }
 
 @media (max-width: 480px) {
   .container {
-    padding: 1rem;
-  }
-
-  .statsWrapper {
-    gap: 0.5rem;
-  }
-
-  .statItem {
-    padding: 0.5rem;
-    min-width: 100px;
-    gap: 0.5rem;
-  }
-
-  .label {
-    font-size: 0.75rem;
-  }
-
-  .number {
-    font-size: 1.75rem;
-  }
-
-  .genreBlock {
     padding: 0.75rem;
   }
 
+  .statsWrapper {
+    gap: 0.4rem;
+  }
+
+  .statItem {
+    padding: 0.4rem;
+    min-width: 92px;
+    gap: 0.35rem;
+  }
+
+  .label {
+    font-size: 0.63rem;
+  }
+
+  .number {
+    font-size: 1.2rem;
+  }
+
+  .genreBlock {
+    padding: 0.52rem;
+  }
+
   .genreItem {
-    font-size: 0.85rem;
-    padding: 0.4rem 0.6rem;
+    font-size: 0.7rem;
+    padding: 0.24rem 0.42rem;
   }
 }
