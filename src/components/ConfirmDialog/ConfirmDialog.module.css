@@ -1,0 +1,69 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.86);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 100;
+}
+
+.panel {
+  width: min(100%, 500px);
+  background: rgba(14, 14, 14, 0.98);
+  border: 1px solid rgba(229, 9, 20, 0.32);
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.45);
+  border-radius: 22px;
+  padding: 1.8rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.badge {
+  align-self: start;
+  display: inline-flex;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(229, 9, 20, 0.18);
+  color: #e50914;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.title {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.message {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 560px) {
+  .panel {
+    padding: 1.2rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .actions {
+    justify-content: stretch;
+  }
+}

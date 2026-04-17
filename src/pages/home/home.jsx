@@ -5,7 +5,8 @@ import { MovieForm } from "../../components/Form/Form";
 import { Button } from "../../components/Button/Button";
 import FilterMovie from "../../components/FilterMovie/FilterMovie";
 import { ListSection } from "../../components/ListSection/ListSection";
-import { Badge } from "../../components/Badge/Badge";
+import { CounterStats } from "../../components/CounterStats/CounterStats";
+import { ConfirmDialog } from "../../components/ConfirmDialog/ConfirmDialog";
 import styles from "./home.module.css";
 
 
@@ -72,12 +73,17 @@ function Home() {
   });
   const [editingId, setEditingId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [deleteTarget, setDeleteTarget] = useState(null);
+  const [formErrors, setFormErrors] = useState({});
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState({
     type: "",
     genre: "",
+  });
+  const [sorting, setSorting] = useState({
+    sortBy: "",
+    order: "asc",
   });
 
   const resetForm = useCallback(() => {
@@ -90,6 +96,7 @@ function Home() {
       type: "Película",
     });
     setEditingId(null);
+    setFormErrors({});
   }, []);
 
 
@@ -101,7 +108,12 @@ function Home() {
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-  }, []);
+
+    // Limpiar error del campo cuando el usuario empiece a escribir
+    if (formErrors[name]) {
+      setFormErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+  }, [formErrors]);
 
   const handleSubmit = useCallback(
     (e) => {
@@ -111,9 +123,41 @@ function Home() {
       const director = form.director.trim();
       const year = parseInt(form.year, 10);
       const rating = Number(form.rating.toString().replace(",", "."));
+      const errors = {};
 
-      if (!title || !director || Number.isNaN(year) || Number.isNaN(rating)) {
-        alert("Completa todos los campos con valores válidos.");
+      if (!title) {
+        errors.title = "El título es obligatorio.";
+      }
+
+      if (!director) {
+        errors.director = "El director es obligatorio.";
+      }
+
+      if (!form.year.trim()) {
+        errors.year = "El año es obligatorio.";
+      } else {
+        const year = parseInt(form.year.trim(), 10);
+        if (Number.isNaN(year)) {
+          errors.year = "Ingresa un año válido.";
+        } else if (year < 1895 || year > 2026) {
+          errors.year = "El año debe estar entre 1895 y 2026.";
+        }
+      }
+
+      if (!form.rating.toString().trim()) {
+        errors.rating = "El rating es obligatorio.";
+      } else {
+        const rating = Number(form.rating.toString().replace(",", "."));
+        if (Number.isNaN(rating)) {
+          errors.rating = "Ingresa un rating válido.";
+        } else if (rating < 0 || rating > 10) {
+          errors.rating = "El rating debe estar entre 0 y 10.";
+        }
+      }
+
+      setFormErrors(errors);
+
+      if (Object.keys(errors).length > 0) {
         return;
       }
 
@@ -174,23 +218,30 @@ function Home() {
       type: item.type,
     });
     setEditingId(item.id);
+    setFormErrors({});
     setIsModalOpen(true);
   }, []);
 
-  const handleDelete = useCallback(
-    (id) => {
-      const confirmed = window.confirm("¿Eliminar esta película o serie?");
-      if (!confirmed) {
-        return;
-      }
-      setArreglo((prev) => prev.filter((item) => item.id !== id));
-      if (editingId === id) {
-        resetForm();
-        setIsModalOpen(false);
-      }
-    },
-    [editingId, resetForm],
-  );
+  const handleDeleteRequest = useCallback((item) => {
+    setDeleteTarget(item);
+  }, []);
+
+  const handleConfirmDelete = useCallback(() => {
+    if (!deleteTarget) {
+      return;
+    }
+
+    setArreglo((prev) => prev.filter((item) => item.id !== deleteTarget.id));
+    if (editingId === deleteTarget.id) {
+      resetForm();
+      setIsModalOpen(false);
+    }
+    setDeleteTarget(null);
+  }, [deleteTarget, editingId, resetForm]);
+
+  const handleCancelDelete = useCallback(() => {
+    setDeleteTarget(null);
+  }, []);
 
   const handleCancelEdit = useCallback(() => {
     resetForm();
@@ -199,6 +250,10 @@ function Home() {
 
   const handleFilterChange = useCallback((name, value) => {
     setFilters((prev) => ({ ...prev, [name]: value }));
+  }, []);
+
+  const handleSortChange = useCallback((name, value) => {
+    setSorting((prev) => ({ ...prev, [name]: value }));
   }, []);
 
   useEffect(() => {
@@ -219,23 +274,42 @@ function Home() {
       return matchesSearch && matchesType && matchesGenre;
     });
 
-    return baseFiltered;
-  }, [searchTerm, arreglo, filters]);
+    if (!sorting.sortBy) {
+      return baseFiltered;
+    }
+
+    return [...baseFiltered].sort((a, b) => {
+      const valueA = a[sorting.sortBy];
+      const valueB = b[sorting.sortBy];
+
+      if (valueA === valueB) {
+        return 0;
+      }
+
+      return sorting.order === "asc"
+        ? valueA - valueB
+        : valueB - valueA;
+    });
+  }, [searchTerm, arreglo, filters, sorting]);
 
   const porVer = useMemo(() => filteredItems.filter((item) => !item.viewed), [filteredItems]);
   const vistos = useMemo(() => filteredItems.filter((item) => item.viewed), [filteredItems]);
 
   const total = useMemo(() => arreglo.length, [arreglo]);
-  const vistasCount = useMemo(() => getVistasCount(arreglo), [arreglo]);
-  const noVistasCount = useMemo(() => getNoVistasCount(arreglo), [arreglo]);
+  const vistasCount = useMemo(() => arreglo.filter((item) => item.viewed).length, [arreglo]);
+  const noVistasCount = useMemo(() => arreglo.filter((item) => !item.viewed).length, [arreglo]);
+  const genreCounts = useMemo(
+    () =>
+      arreglo.reduce((acc, item) => {
+        acc[item.genre] = (acc[item.genre] || 0) + 1;
+        return acc;
+      }, {}),
+    [arreglo],
+  );
 
-  function getVistasCount(arr) {
-    return arr.filter((item) => item.viewed).length;
-  }
-
-  function getNoVistasCount(arr) {
-    return arr.filter((item) => !item.viewed).length;
-  }
+  const noResultsWarning =
+    filteredItems.length === 0 &&
+    (searchTerm.trim() !== "" || filters.type !== "" || filters.genre !== "" || sorting.sortBy !== "");
 
   return (
     <div className={styles.home}>
@@ -270,16 +344,25 @@ function Home() {
 
         <FilterMovie
           filters={filters}
+          sorting={sorting}
           onChange={handleFilterChange}
+          onSortChange={handleSortChange}
         />
       </div>
 
+      {noResultsWarning && (
+        <div className={styles.noResultsBanner}>
+          No hay resultados que coincidan con los filtros.
+        </div>
+      )}
+
       {/* Contadores */}
-      <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem" }}>
-        <Badge variant="default">Total: {total}</Badge>
-        <Badge variant="viewed">Vistas: {vistasCount}</Badge>
-        <Badge variant="notViewed">No vistas: {noVistasCount}</Badge>
-      </div>
+      <CounterStats 
+        total={total}
+        viewed={vistasCount}
+        notViewed={noVistasCount}
+        genreCounts={genreCounts}
+      />
 
       <ListSection
         title="Por ver"
@@ -287,7 +370,7 @@ function Home() {
         emptyText="No hay contsetenido por ver."
         onToggleViewed={handleToggleViewed}
         onEdit={handleEdit}
-        onDelete={handleDelete}
+        onDelete={handleDeleteRequest}
       />
 
       <ListSection
@@ -296,7 +379,7 @@ function Home() {
         emptyText="No hay contenido visto."
         onToggleViewed={handleToggleViewed}
         onEdit={handleEdit}
-        onDelete={handleDelete}
+        onDelete={handleDeleteRequest}
       />
 
       {isModalOpen && (
@@ -304,6 +387,7 @@ function Home() {
           <div className={styles.modalPanel} onClick={(e) => e.stopPropagation()}>
             <MovieForm
               form={form}
+              errors={formErrors}
               onChange={handleChange}
               onSubmit={handleSubmit}
               isEditing={Boolean(editingId)}
@@ -312,6 +396,18 @@ function Home() {
           </div>
         </div>
       )}
+
+      <ConfirmDialog
+        open={Boolean(deleteTarget)}
+        title="Eliminar película o serie"
+        message={
+          deleteTarget
+            ? `¿Seguro que querés eliminar "${deleteTarget.title}"? Esta acción es irreversible.`
+            : ""
+        }
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+      />
     </div>
   );
 }

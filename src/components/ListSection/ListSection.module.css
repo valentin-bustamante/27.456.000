@@ -1,9 +1,9 @@
 .section {
-  margin: 1.8rem 0;
-  padding: 1rem 1rem 1.1rem;
+  margin: 2.3rem 0;
+  padding: 1.3rem 1.3rem 1.4rem;
   background: rgba(20, 20, 20, 0.92);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
+  border-radius: 18px;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
   width: 100%;
   flex-wrap: wrap;
@@ -12,14 +12,15 @@
 .sectionDiv {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 .title {
-  margin-bottom: 0.9rem;
-  font-size: 1.25rem;
+  margin-bottom: 1.1rem;
+  font-size: 1.35rem;
   color: #ffffff;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   border-bottom: 2px solid #e50914;
-  padding-bottom: 0.35rem;
+  padding-bottom: 0.45rem;
 }

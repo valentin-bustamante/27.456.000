@@ -1,7 +1,8 @@
 .home {
-  padding: 2rem 2rem 3rem;
+  padding: 3rem 2rem 4rem;
+  max-width: 1280px;
   width: 100%;
-  margin: 0;
+  margin: 0 auto;
   background: radial-gradient(circle at top, rgba(255, 255, 255, 0.04), transparent 35%),
     linear-gradient(145deg, #050505 0%, #111111 100%);
   min-height: 100vh;
@@ -9,7 +10,7 @@
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .addCard {
@@ -21,11 +22,12 @@
   border-radius: 14px;
   background: rgba(18, 18, 18, 0.94);
   color: #ffffff;
-  padding: 1rem 1.2rem;
+  padding: 1.2rem 1.5rem;
   cursor: pointer;
   text-align: left;
   transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+  margin-bottom: 0.8rem;
 }
 
 .addCard:hover {
@@ -69,23 +71,37 @@
 .modalOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.82);
+  background: rgba(0, 0, 0, 0.86);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
+  padding: 2rem;
   z-index: 50;
 }
 
 .modalPanel {
-  width: min(100%, 540px);
-  max-height: 95vh;
+  width: min(100%, 760px);
+  max-width: 760px;
+  max-height: 92vh;
   overflow-y: auto;
-  padding: 0.9rem;
+  padding: 1.4rem;
   background: rgba(12, 12, 12, 0.98);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 22px;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 26px;
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.45);
+}
+
+@media (max-width: 900px) {
+  .modalOverlay {
+    padding: 1rem;
+  }
+
+  .modalPanel {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+    border-radius: 20px;
+  }
 }
 
 .form {
@@ -190,15 +206,37 @@
 
 .searchFilterRow {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
   gap: 1rem;
   width: 100%;
+  margin-top: 0.6rem;
 }
 
 .searchFilterRow > * {
-  flex: 1 1 0;
-  max-width: 460px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.searchFilterRow .searchBarWrapper {
+  width: 100%;
+}
+
+.searchFilterRow .filterPanelWrapper {
+  width: 100%;
+}
+
+.noResultsBanner {
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+  background: rgba(229, 9, 20, 0.15);
+  border: 1px solid rgba(229, 9, 20, 0.35);
+  color: #ffffff;
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+  margin: 1rem 0;
 }
 
 @media (max-width: 900px) {

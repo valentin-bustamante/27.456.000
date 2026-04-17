@@ -1,32 +1,77 @@
 .field {
   display: grid;
-  gap: 0.65rem;
-  font-weight: 500;
+  gap: 0.55rem;
+  font-size: 0.88rem;
   color: #ffffff;
-  font-size: 0.94rem;
+}
+
+.field::before {
+  content: attr(data-label);
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hasError::before {
+  color: #f87171;
 }
 
 .field input,
 .field select {
   width: 100%;
-  padding: 0.75rem 0.95rem;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.06);
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  background: rgba(24, 24, 24, 0.95);
   color: #ffffff;
-  font-size: 0.92rem;
-  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  font-size: 0.95rem;
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.field input:hover,
+.field select:hover {
+  border-color: rgba(229, 9, 20, 0.3);
 }
 
 .field input:focus,
 .field select:focus {
   outline: none;
   border-color: #e50914;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.16);
+  transform: translateY(-1px);
+}
+
+.hasError input,
+.hasError select {
+  border-color: #e50914 !important;
+  background-color: rgba(229, 9, 20, 0.08) !important;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
 .field input::placeholder,
 .field select option {
   color: rgba(255, 255, 255, 0.55);
+}
+
+.error {
+  display: block;
+  margin-top: 0.5rem;
+  color: #e50914;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.3;
+  animation: slideInError 0.3s ease-out;
+}
+
+@keyframes slideInError {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
