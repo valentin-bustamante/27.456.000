@@ -1,29 +1,56 @@
 import styles from "./FilterMovie.module.css";
 
-function FilterMovie({ filters, onChange }) {
+function FilterMovie({ filters, sorting, onChange, onSortChange }) {
     return (
         <div className={styles.container}>
-            <select
-                className={styles.select}
-                value={filters.type}
-                onChange={(e) => onChange("type", e.target.value)}
-            >
-                <option value="">Todos</option>
-                <option value="Película">Películas</option>
-                <option value="Serie">Series</option>
-            </select>
+            <div className={styles.filterRow}>
+                <span className={styles.rowLabel}>Filtros</span>
+                <select
+                    className={styles.select}
+                    value={filters.type}
+                    onChange={(e) => onChange("type", e.target.value)}
+                >
+                    <option value="">Todos</option>
+                    <option value="Película">Películas</option>
+                    <option value="Serie">Series</option>
+                </select>
 
-            <select
-                className={styles.select}
-                value={filters.genre}
-                onChange={(e) => onChange("genre", e.target.value)}
-            >
-                <option value="">Todos los generos</option>
-                <option value="Fantasía">Fantasía</option>
-                <option value="Ciencia ficción">Ciencia ficción</option>
-                <option value="Thriller">Thriller</option>
-                <option value="Drama">Drama</option>
-            </select>
+                <select
+                    className={styles.select}
+                    value={filters.genre}
+                    onChange={(e) => onChange("genre", e.target.value)}
+                >
+                    <option value="">Todos los géneros</option>
+                    <option value="Fantasía">Fantasía</option>
+                    <option value="Ciencia ficción">Ciencia ficción</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Comedia">Comedia</option>
+                    <option value="Aventura">Aventura</option>
+                </select>
+            </div>
+
+            <div className={styles.sortRow}>
+                <span className={styles.rowLabel}>Ordenar</span>
+                <select
+                    className={styles.select}
+                    value={sorting.sortBy}
+                    onChange={(e) => onSortChange("sortBy", e.target.value)}
+                >
+                    <option value="">Sin ordenar</option>
+                    <option value="year">Año</option>
+                    <option value="rating">Rating</option>
+                </select>
+
+                <select
+                    className={styles.select}
+                    value={sorting.order}
+                    onChange={(e) => onSortChange("order", e.target.value)}
+                >
+                    <option value="asc">Ascendente</option>
+                    <option value="desc">Descendente</option>
+                </select>
+            </div>
         </div>
     );
 }

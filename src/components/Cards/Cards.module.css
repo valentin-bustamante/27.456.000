@@ -1,8 +1,21 @@
 .grid {
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(2, 1fr);
-  margin: 0.9rem 0;
+  gap: 1.6rem;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  margin: 1.4rem 0 0;
+  justify-items: stretch;
+}
+
+@media (max-width: 920px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .empty {

@@ -44,7 +44,7 @@ const MovieCardComponent = ({ item, onToggleViewed, onEdit, onDelete }) => {
           type="button"
           variant="danger"
           size="small"
-          onClick={() => onDelete(item.id)}
+          onClick={() => onDelete(item)}
         >
           Eliminar
         </Button>
