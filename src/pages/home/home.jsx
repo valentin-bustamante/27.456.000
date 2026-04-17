@@ -5,6 +5,7 @@ import { MovieForm } from "../../components/Form/Form";
 import { Button } from "../../components/Button/Button";
 import FilterMovie from "../../components/FilterMovie/FilterMovie";
 import { ListSection } from "../../components/ListSection/ListSection";
+import { Badge } from "../../components/Badge/Badge";
 import styles from "./home.module.css";
 
 
@@ -224,6 +225,18 @@ function Home() {
   const porVer = useMemo(() => filteredItems.filter((item) => !item.viewed), [filteredItems]);
   const vistos = useMemo(() => filteredItems.filter((item) => item.viewed), [filteredItems]);
 
+  const total = useMemo(() => arreglo.length, [arreglo]);
+  const vistasCount = useMemo(() => getVistasCount(arreglo), [arreglo]);
+  const noVistasCount = useMemo(() => getNoVistasCount(arreglo), [arreglo]);
+
+  function getVistasCount(arr) {
+    return arr.filter((item) => item.viewed).length;
+  }
+
+  function getNoVistasCount(arr) {
+    return arr.filter((item) => !item.viewed).length;
+  }
+
   return (
     <div className={styles.home}>
       <div className="header">
@@ -259,6 +272,13 @@ function Home() {
           filters={filters}
           onChange={handleFilterChange}
         />
+      </div>
+
+      {/* Contadores */}
+      <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem" }}>
+        <Badge variant="default">Total: {total}</Badge>
+        <Badge variant="viewed">Vistas: {vistasCount}</Badge>
+        <Badge variant="notViewed">No vistas: {noVistasCount}</Badge>
       </div>
 
       <ListSection
