@@ -8,7 +8,7 @@ function FilterMovie({ filters, onChange }) {
                 value={filters.type}
                 onChange={(e) => onChange("type", e.target.value)}
             >
-                <option value="">Tipo</option>
+                <option value="">Todos</option>
                 <option value="Película">Películas</option>
                 <option value="Serie">Series</option>
             </select>
