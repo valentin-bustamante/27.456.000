@@ -7,37 +7,25 @@
   justify-content: center;
   background: radial-gradient(circle at top, rgba(255, 255, 255, 0.04), transparent 25%),
     linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
-}
-
-.panel {
-  padding: 2.4rem 2.8rem;
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(10, 10, 10, 0.96);
-  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.45);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  animation: panelFade 0.8s ease-out;
+  animation: bgFade 3.5s ease-out forwards;
 }
 
 .logoBlock {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  animation: logoAppear 1.2s ease-out both;
+  animation: logoEnter 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .letter {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  animation: logoPulse 1.6s ease-in-out infinite alternate;
   font-size: clamp(3.5rem, 6vw, 5.8rem);
   font-weight: 900;
   color: #e50914;
   text-shadow: 0 0 24px rgba(229, 9, 20, 0.35);
+  animation: letterGlow 3.5s ease-in-out forwards;
 }
 
 .text {
@@ -47,53 +35,79 @@
   font-weight: 800;
   color: #ffffff;
   opacity: 0;
-  animation: textFade 1.2s ease-out 0.45s forwards;
+  animation: textAppear 3.5s ease-out forwards;
 }
 
-@keyframes logoAppear {
+@keyframes logoEnter {
   0% {
-    transform: translateY(16px) scale(0.86);
+    transform: translateY(32px) scale(0.7);
     opacity: 0;
   }
-  100% {
+  15% {
     transform: translateY(0) scale(1);
     opacity: 1;
   }
-}
-
-@keyframes textFade {
-  0% {
-    opacity: 0;
-    transform: translateY(8px);
+  85% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
   }
   100% {
-    opacity: 1;
-    transform: translateY(0);
+    transform: translateY(-12px) scale(1.05);
+    opacity: 0;
   }
 }
 
-@keyframes logoPulse {
+@keyframes letterGlow {
   0% {
-    transform: scale(0.98);
-    opacity: 0.9;
+    text-shadow: 0 0 8px rgba(229, 9, 20, 0.2);
+    filter: brightness(0.9);
+  }
+  10% {
+    text-shadow: 0 0 12px rgba(229, 9, 20, 0.25);
+  }
+  25% {
+    text-shadow: 0 0 32px rgba(229, 9, 20, 0.5);
+    filter: brightness(1);
   }
   50% {
-    transform: scale(1.04);
-    opacity: 1;
+    text-shadow: 0 0 48px rgba(229, 9, 20, 0.6), 0 0 80px rgba(229, 9, 20, 0.15);
+  }
+  75% {
+    text-shadow: 0 0 32px rgba(229, 9, 20, 0.5), inset 0 0 20px rgba(229, 9, 20, 0.1);
   }
   100% {
-    transform: scale(0.98);
-    opacity: 0.9;
+    text-shadow: 0 0 8px rgba(229, 9, 20, 0.2);
+    filter: brightness(0.9);
   }
 }
 
-@keyframes panelFade {
-  from {
+@keyframes textAppear {
+  0% {
     opacity: 0;
-    transform: scale(0.95);
+    transform: translateX(-8px);
   }
-  to {
+  20% {
     opacity: 1;
-    transform: scale(1);
+    transform: translateX(0);
+  }
+  85% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+}
+
+@keyframes bgFade {
+  0% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
