@@ -68,14 +68,11 @@
 - `src/components/FilterMovie/FilterMovie.jsx`: opciones de filtro y ordenamiento.
 - `src/components/CounterStats/CounterStats.jsx`: visualiza los contadores principales y los totales por género.
 
-## Capturas de pantalla
-- Agrega capturas de pantalla de la aplicación en una carpeta `screenshots/` y enlázalas aquí.
-
 ## Nota sobre la consigna
 Este proyecto usa Vite con archivos `.jsx`; aunque la consigna menciona `index.js`, en este repo el equivalente es `src/main.jsx`.
 
-## Tablero Kanban
-- Inserta aquí el enlace al tablero Kanban del grupo una vez creado.
+## Tablero Trello
+- https://trello.com/b/29cyiWse/27456000
 
 ## Contacto docente
 - Agustín: guillermo.chiarotto@est.fi.uncoma.edu.ar
