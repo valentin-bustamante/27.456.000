@@ -314,7 +314,7 @@ function Home() {
   return (
     <div className={styles.home}>
       <div className="header">
-      <img src="../src/assets/logo.png" alt="Logo" className={styles.logo}/>
+      <img src="./src/assets/logo.png" alt="Logo" className={styles.logo}/>
       <Titulo texto={nombreProyecto} />
         </div>
 
