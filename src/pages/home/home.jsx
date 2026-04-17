@@ -313,10 +313,9 @@ function Home() {
 
   return (
     <div className={styles.home}>
-      <div className="header">
-      <img src="./src/assets/logo.png" alt="Logo" className={styles.logo}/>
-      <Titulo texto={nombreProyecto} />
-        </div>
+      <div className={styles.header}>
+        <Titulo texto="Ñetflix" />
+      </div>
 
 
       <Button
